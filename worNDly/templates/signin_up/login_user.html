@@ -9,6 +9,7 @@
 <br>
 <head>
 <style>
+  /* CSS styles */
   body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -39,21 +40,29 @@
 </head>
 
 <div class="center">
+    <!-- Log in form -->
     <h2><u>Log In to Account!</u></h2>
-<form action="" method="post">
-    {% csrf_token %}
-    <p></p>
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-    </div>
-    <p></p>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <p></p>
-    <button class="btn btn-outline-dark" type="submit">Submit Profile!</button>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p></p>
+        <!-- Username input -->
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <p></p>
+        <!-- Password input -->
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <p></p>
+        <!-- Submit button -->
+        <button class="btn btn-outline-dark" type="submit">Submit Profile!</button>
+    </form>
     
-</form>
+    <p></p>
+    <!-- Back button -->
+    <a href="{% url 'homepage' %}" class="button">Back to Home</a>
+</div>
 {% endblock %}
