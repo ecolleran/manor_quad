@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Login user!{% endblock %}
+
+<h2>Create a new WorNDly user!</h2>
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <h2><u>Sign Into Profile!</u></h2>
+    <p></p>
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <p></p>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <p></p>
+    <button class="btn btn-outline-dark" type="submit">Submit Profile!</button>
+    
+</form>
+{% endblock %}

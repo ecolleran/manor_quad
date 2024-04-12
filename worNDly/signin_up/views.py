@@ -21,17 +21,29 @@ def create_new_user(request):
         
 
         player = Player.objects.create(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'])
-        return redirect('/')
+        return redirect('/', {'new_user': '', 'new_name': '', })
 
-class CreateNewPlayer(View):
+'''class CreateNewPlayer(View):
     def get(request):
-        return render(request, 'user/login.html', {'form': UserForm(), 'user': request.user.is_authenticated})
+        return render(request, 'user/login.html', {'form': UserForm(), 'user': request.user.is_authenticated})'''
 
     
 
 ''' Feature 1.2: Sign-in '''
-#def site_login(request):
-    #pass
+def login_users(request):
+    if request.method == 'GET':
+        return render(request, "signin_up/login_user.html")
+    else:
+        print(request.POST)
+        for p in Player.objects.all():
+            if p.username == request.POST['username'] and p.password == request.POST['password']:
+                logged_in = Player(username = request.POST['username'], password = request.POST['password'])
+                new_user = True
+                new_name = logged_in.username
+                print(new_user, new_name)
+                return render(request, 'homepage.html', {'new_user': new_user, 'new_name': new_name})
+        
+        return render(request, "signin_up/login_user.html")
 
 #class LoginView(View):
     #pass
