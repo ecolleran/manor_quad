@@ -44,9 +44,10 @@
 </style>
 
 {% if new_user %}
-<p>{{ new_name }}, welcome to WorNDly!</p>
-
-<p><a href="{% url 'logout' %}">Sign Out.</a></p>
+<h2 style="text-align: center; margin-bottom: 20px;">{{ new_name }}, welcome to WorNDly!</h2>
+<div class="center">
+    <button><a href="{% url 'logout' %}" style="text-decoration: none; color: inherit;">Sign Out.</a></button>
+</div>
 
 {% else %}
 <h2 style="text-align: center; margin-bottom: 20px;">Welcome to WorNDly.</h2>
@@ -56,6 +57,12 @@
     <button><a href="{% url 'create' %}" style="text-decoration: none; color: inherit;">Create a New Profile!</a></button>
     <p></p>
     <button><a href="{% url 'login' %}" style="text-decoration: none; color: inherit;">Sign In.</a></button>
+</div>
+
+<!-- Picture -->
+<div class="center">
+    <img src="https://miro.medium.com/v2/resize:fit:1200/1*LpxLQj3xgPwMaUjaM3NW7g.jpeg" alt="Shrek says hi" style="width: 50%; margin-top: 20px;">
+</div>
     
 {% endif %}
 
