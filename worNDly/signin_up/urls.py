@@ -6,7 +6,8 @@ from . import views
 
 urlpatterns = [
     path('create/', views.create_new_user, name="create"), 
-    path('login/', views.login_users, name="login")
+    path('login/', views.login_users, name="login"),
+    path('logout/', views.logout_users, name='logout')
 ]
 
 #path('sign_in/', CreateUserView.as_view()),

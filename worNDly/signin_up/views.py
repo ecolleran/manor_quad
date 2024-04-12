@@ -49,9 +49,11 @@ def login_users(request):
     #pass
 
 ''' Feature 1.3: Sign-out '''
-'''def site_logout(request):
-    logout(request)
-    return HttpResponseRedirect('/')'''
+def logout_users(request):
+    # logout(request)
+    print('logging out')
+
+    return render(request, 'homepage.html', {'new_user': False, 'new_name': ''})
 
 #class LogoutView(View):
     #pass
