@@ -2,20 +2,61 @@
 
 {% block title %}WorNDly by manor-quad!{% endblock %}
 
-
 {% block content %}
+<br>
+ <style>
+  .row {
+    font-size: 22px;
+  }
+  .logout a {
+      background-color: white;
+      color: black;
+      border: 2px solid rgb(231, 32, 14);
+      padding: 20px;
+      transition-duration: 0.4s;
+
+      width: 30%;
+    }
+    .scroll-container {
+        display: flex;
+
+    }
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      background-color: white;
+      color: black;
+      border: 2px solid rgb(7, 75, 54);
+      border-radius: 4px;
+      padding: 20px;
+      transition-duration: 0.4s;
+      display: inline-block;
+      margin: 10px auto;
+    }
+    button:hover {
+      background-color: rgb(22, 198, 143);
+      color: white;
+    }
+
+</style>
+
 {% if new_user %}
 <p>{{ new_name }}, welcome to WorNDly!</p>
 
 <p><a href="{% url 'logout' %}">Sign Out.</a></p>
 
 {% else %}
-<p> This is the home page! Welcome to WorNDly.</p>
+<h2 style="text-align: center; margin-bottom: 20px;">Welcome to WorNDly.</h2>
+<p style="text-align: center;">This is our home page!</p>
 
-<p><a href="{% url 'create' %}">Create a New Profile!</a></p>
-
-<p> <a href="{% url 'login' %}"> Sign In. </a> </p>
-
+<div class="center">
+    <button><a href="{% url 'create' %}" style="text-decoration: none; color: inherit;">Create a New Profile!</a></button>
+    <p></p>
+    <button><a href="{% url 'login' %}" style="text-decoration: none; color: inherit;">Sign In.</a></button>
+    
 {% endif %}
 
 {% endblock %}
