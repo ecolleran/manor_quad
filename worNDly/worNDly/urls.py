@@ -23,4 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signin_up/', include('signin_up.urls')),
     path("", TemplateView.as_view(template_name="homepage.html"), name="homepage"),
+    path('store/', include('store.urls')),
+    path('dashboard/', include('dashboard.urls')),
+    path('gameplay/', include('gameplay.urls')),
 ]

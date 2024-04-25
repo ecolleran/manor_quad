@@ -3,5 +3,5 @@ from . import views
 
 app_name='store'
 urlpatterns = [
-    path('open-store/', views.open_store, name='opne_store'),
+    path('open_store/', views.open_store, name='opne_store'),
 ]
