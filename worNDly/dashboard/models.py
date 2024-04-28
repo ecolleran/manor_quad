@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Past_Game(models.Model):
+'''class Past_Game(models.Model):
     user = models.ForeignKey(Player, on_delete=models.CASCADE)
     date = models.DateTimeField('date played')
     fail = models.BooleanField()
@@ -15,4 +15,4 @@ class Total_Games(models.Model):
     guess_tracker = ArrayField(
         models.IntegerField()
         size=6 #id if this is zero index or not
-    )
+    )'''

@@ -1,18 +1,21 @@
 from django.db import models
+from signin_up.models import Player
+
+
 
 # Create your models here.
 
-class Game_In_Play(models.Model):
+'''class Game_In_Play(models.Model):
     GERMAN = "de.txt"
     SPANISH = "es.txt"
     FRENCH = "fr.txt"
     PORTUGUESE = "pt.txt"
     ENGLISH = "en.txt"
-    YEAR_IN_SCHOOL_CHOICES = {
+    LANGS = {
         GERMAN: "German",
         SPANISH: "Spanish",
         FRENCH: "French",
-        PORTUGUESE: "Protuguese",
+        PORTUGUESE: "Portuguese",
         ENGLISH: "English",
     }
     user = models.ForeignKey(Player, on_delete=models.CASCADE)
@@ -35,4 +38,4 @@ class Game_In_Play(models.Model):
         size=5,
     )
     fail = models.BooleanField()
-    attempts = models.IntegerField(max_length=6)
+    attempts = models.IntegerField(max_length=6)'''

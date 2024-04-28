@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}WorNDly by manor-quad!{% endblock %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+  .h2 {
+    margin-top: 10px;
+    margin-left: 80px: 
+  }
+
+  .button {
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  #German {
+    color: red;
+  }
+
+  #English {
+    color: black;
+  }
+
+  #Spanish {
+    color: blue;
+  }
+
+  #French {
+    color: purple;
+  }
+
+  #Portuguese {
+    color: darkgreen;
+  }
+</style>
+
+<p class="h2">Choose your desired language!</p>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <button type="button" class="btn btn-outline-primary" id="German" name = "german">
+    <a href="{% url 'gameplay:start_game_GERMAN' %}">
+      German
+    </a>
+  </button>
+
+  <button type="button" class="btn btn-outline-primary" id="English">
+    <a href="{% url 'gameplay:start_game' %}">
+      English
+    </a>
+  </button>
+
+  <button type="button" class="btn btn-outline-primary" id="Spanish">
+    <a href="{% url 'gameplay:start_game_SPANISH' %}">
+      Spanish
+    </a>
+  </button>
+
+  <button type="button" class="btn btn-outline-primary" id="French">
+    <a href="{% url 'gameplay:start_game_FRENCH' %}">
+      French
+    </a>
+  </button>
+
+  <button type="button" class="btn btn-outline-primary" id="Portuguese">
+    <a href="{% url 'gameplay:start_game_PORT' %}">
+      Portuguese
+    </a>
+  </button>
+
+</form>
+
+
+
+
+{% endblock %}

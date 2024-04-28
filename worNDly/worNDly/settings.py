@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'signin_up.apps.SigninUpConfig',
+    'gameplay.apps.GameplayConfig',
+    'dashboard.apps.DashboardConfig',
+    'store.apps.StoreConfig',
 ]
 
 MIDDLEWARE = [

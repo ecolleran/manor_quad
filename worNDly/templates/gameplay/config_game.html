@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}WorNDly by manor-quad!{% endblock %}
+
+{% block content %}
+
+<style>
+    .btn-sm {
+        margin-top: 50px;
+        margin-left: 50px;
+        margin-right: 20px; 
+        font-size: 0.875rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;
+    }
+    
+    .input-group-prepend {
+        margin-left: 20px;
+        margin-right: 20px; 
+    }
+
+    .input-group {
+        margin-top: 50px;
+        margin-left: 50px;
+        margin-right: 20px;
+        width: 500px;
+    }
+
+    .badges-container {
+        display: flex; /* Use flexbox layout */
+        margin-left: 50px;
+    }
+
+    .badge {
+        margin-left: 30px;
+        margin-top: 10px;
+        width: 100px; 
+        height: 100px; 
+        background-color: #c4c8d4; 
+        color: #dbd5d5; 
+        text-align: center; 
+        line-height: 100px; 
+    }
+
+    </style>
+
+<h1>Guess a word in {{language_selected}}!</h1>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <button class="btn btn-outline-secondary" type="submit">Enter your guess!</button>
+    </div>
+    <input type="text" class="form-control" placeholder="Should be a FIVE letter word." aria-label="" aria-describedby="basic-addon1">
+  </div>
+
+<div class="badges-container">
+    <div class="badge">Cell!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+</div>
+
+<div class="badges-container">
+    <div class="badge">Cell!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+</div>
+
+<div class="badges-container">
+    <div class="badge">Cell!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+</div>
+
+<div class="badges-container">
+    <div class="badge">Cell!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+</div>
+
+<div class="badges-container">
+    <div class="badge">Cell!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+</div>
+
+<div class="badges-container">
+    <div class="badge">Cell!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+    <div class="badge">CELL!</div>
+</div>
+
+
+{% endblock %}
