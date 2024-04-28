@@ -44,7 +44,7 @@
 <form action="" method="post">
   {% csrf_token %}
   <button type="button" class="btn btn-outline-primary" id="German" name = "german">
-    <a href="{% url 'gameplay:start_game_GERMAN' %}">
+    <a href="{% url 'gameplay:start_game' %}">
       German
     </a>
   </button>
@@ -56,19 +56,19 @@
   </button>
 
   <button type="button" class="btn btn-outline-primary" id="Spanish">
-    <a href="{% url 'gameplay:start_game_SPANISH' %}">
+    <a href="{% url 'gameplay:start_game' %}">
       Spanish
     </a>
   </button>
 
   <button type="button" class="btn btn-outline-primary" id="French">
-    <a href="{% url 'gameplay:start_game_FRENCH' %}">
+    <a href="{% url 'gameplay:start_game' %}">
       French
     </a>
   </button>
 
   <button type="button" class="btn btn-outline-primary" id="Portuguese">
-    <a href="{% url 'gameplay:start_game_PORT' %}">
+    <a href="{% url 'gameplay:start_game' %}">
       Portuguese
     </a>
   </button>

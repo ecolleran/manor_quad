@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-
 # Create your views here.
 
 def desired_lang(request):
@@ -8,25 +7,21 @@ def desired_lang(request):
         return render(request, 'gameplay/choose_lang.html')
     else:
         print(request.POST)
-        
 
 def start_game(request):
-    wordSet = {word.strip() for word in open('gameplay/languages/en.txt')}
+    file = 'gameplay/languages/en.txt'
+    language = request.POST.get('language')
+    
+    if language == 'GERMAN':
+        file='gameplay/languages/de.txt'
+    elif language == 'SPANISH':
+        file += 'gameplay/languages/es.txt'
+    elif language == 'PORTUGUESE':
+        file += 'gameplay/languages/pt.txt'
+    elif language == 'FRENCH':
+        file += 'gameplay/languages/fr.txt'
 
-    return render(request, 'gameplay/config_game.html', {'language_selected': 'English'})
+    # Make sure to handle file not found or other errors here
+    wordSet = {word.strip() for word in open(file)}
 
-def start_game_GERMAN(request):
-    wordSet = {word.strip() for word in open('gameplay/languages/de.txt')}
-    return render(request, 'gameplay/config_game.html', {'language_selected': 'German'})
-
-def start_game_SPANISH(request):
-    wordSet = {word.strip() for word in open('gameplay/languages/es.txt')}
-    return render(request, 'gameplay/config_game.html', {'language_selected': 'Spanish'})
-
-def start_game_PORT(request):
-    wordSet = {word.strip() for word in open('gameplay/languages/pt.txt')}
-    return render(request, 'gameplay/config_game.html', {'language_selected': 'Portuguese'})
-
-def start_game_FRENCH(request):
-    wordSet = {word.strip() for word in open('gameplay/languages/fr.txt')}
-    return render(request, 'gameplay/config_game.html', {'language_selected': 'French'})
+    return render(request, 'gameplay/config_game.html')
