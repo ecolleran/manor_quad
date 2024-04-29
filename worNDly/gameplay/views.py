@@ -5,6 +5,13 @@ from .wordle import Guess, Solution
 # Create your views here.
 
 wordOfDay = ''
+lang_files = {'gameplay/languages/en.txt': 'English',
+              'gameplay/languages/de.txt': 'German',
+              'gameplay/languages/es.txt': 'Spanish',
+              'gameplay/languages/fr.txt': 'French',
+              'gameplay/languages/pt.txt': 'Portuguese'
+}
+wordSet = {}
 solution = ''
 num_guesses = 0
 guess_left = 6
@@ -26,8 +33,9 @@ def desired_lang(request):
     else:
         print(request.POST)
 
-def start_game(request):
+def start_game(request, lang_file = 'gameplay/languages/en.txt'):
     global wordOfDay
+    global wordSet
     global solution
     global num_guesses
     global found_word
@@ -35,14 +43,31 @@ def start_game(request):
     global green, gray, yellow
     global firstguess, secondguess, thirdguess, fourthguess, fifthguess, lastguess
 
-    language = request.POST.get('language')
     if request.method == 'GET':
         num_guesses = 0
-        wordSet = readWordSet('gameplay/languages/en.txt')
+        wordSet = readWordSet(lang_file)
         wordOfDay = random.choice(list(wordSet))
         solution = Solution(wordOfDay, len(wordOfDay))
         print(wordOfDay, solution)
     elif num_guesses < 6 and request.method == 'POST' and not found_word:
+        if request.POST['curr_guess'].upper() not in wordSet or len(request.POST['curr_guess']) != 5:
+            print('Invalid word!', request.POST['curr_guess'])
+            return render(request, 'gameplay/config_game.html', {
+                'guesses_left': guess_left,
+                'language_selected': 'English',
+                'word_of_day': wordOfDay,
+                'solution': solution,
+                'yellow_letters': yellow,
+                'gray_letters': gray,
+                'green_letters': green,
+                'firstguess': firstguess,
+                'secondguess': secondguess,
+                'thirdguess': thirdguess,
+                'fourthguess': fourthguess,
+                'fifthguess': fifthguess,
+                'lastguess': lastguess,
+            })
+
         num_guesses += 1
         
         print(request.POST)
@@ -78,10 +103,11 @@ def start_game(request):
         guess_left = f'Well done! You won in {num_guesses} guesses.'
     
 
+
     # Render the config_game.html template with necessary context
     return render(request, 'gameplay/config_game.html', {
         'guesses_left': guess_left,
-        'language_selected': 'English',
+        'language_selected': lang_files[lang_file],
         'word_of_day': wordOfDay,
         'solution': solution,
         'yellow_letters': yellow,
@@ -94,6 +120,9 @@ def start_game(request):
         'fifthguess': fifthguess,
         'lastguess': lastguess,
     })
+
+def start_game_GERMAN(request):
+    return start_game(request, 'gameplay/languages/de.txt')
 
 def readWordSet(language):
     # Define file paths based on selected language
