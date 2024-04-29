@@ -41,10 +41,28 @@
         text-align: center; 
         line-height: 100px; 
     }
+</style>
 
-    </style>
+<h1>Guess a word in {{ language_selected }}!</h1>
 
-<h1>Guess a word in {{language_selected}}!</h1>
+<p>Word of the day: {{ word_of_day }}</p>
+
+<form method="post">
+  {% csrf_token %}
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <button class="btn btn-outline-secondary" type="submit">Enter</button>
+    </div>
+    <input name="guess" type="text" class="form-control" placeholder="Enter your guess (5 letters)" maxlength="5" required>
+  </div>
+</form>
+
+<div>
+    <p>Guesses left: {{ guesses_left }}</p>
+    <p>Good letters: {{ yellow_letters }}</p>
+    <p>Bad letters: {{ gray_letters }}</p>
+    <p>Correct letters: {{ green_letters }}</p>
+</div>
 
 <div class="input-group mb-3">
     <div class="input-group-prepend">

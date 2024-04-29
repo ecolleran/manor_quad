@@ -1,4 +1,6 @@
 from django.shortcuts import render
+import random
+from .wordle import Guess, Solution
 
 # Create your views here.
 
@@ -9,19 +11,27 @@ def desired_lang(request):
         print(request.POST)
 
 def start_game(request):
-    file = 'gameplay/languages/en.txt'
     language = request.POST.get('language')
+    wordSet = readWordSet(language)
+    wordOfDay = random.choice(list(wordSet))
+    solution = Solution(wordOfDay, len(wordOfDay))
     
-    if language == 'GERMAN':
-        file='gameplay/languages/de.txt'
-    elif language == 'SPANISH':
-        file += 'gameplay/languages/es.txt'
-    elif language == 'PORTUGUESE':
-        file += 'gameplay/languages/pt.txt'
-    elif language == 'FRENCH':
-        file += 'gameplay/languages/fr.txt'
+    # Render the config_game.html template with necessary context
+    return render(request, 'gameplay/config_game.html', {
+        'language_selected': language,
+        'word_of_day': wordOfDay,
+        'solution': solution,
+    })
 
-    # Make sure to handle file not found or other errors here
-    wordSet = {word.strip() for word in open(file)}
+def readWordSet(language):
+    # Define file paths based on selected language
+    language_files={
+        'GERMAN': 'gameplay/languages/de.txt',
+        'ENGLISH': 'gameplay/languages/en.txt',
+        'SPANISH': 'gameplay/languages/es.txt',
+        'PORTUGUESE': 'gameplay/languages/pt.txt',
+        'FRENCH': 'gameplay/languages/fr.txt',
+    }
 
-    return render(request, 'gameplay/config_game.html')
+    file=language_files.get(language, "gameplay/languages/en.txt")
+    return {word.strip() for word in open(file)}

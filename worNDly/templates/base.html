@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <title>{% block title %}WorNDly! by manor-quad{% endblock %}</title>
+  <img src="{% static 'worNDly_logo.jpg' %}" alt="Banner Image" style="width:2300px;height:200px;">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
@@ -12,85 +14,73 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"></script>
   
-  <style>
-        /* CSS styles */
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #C1EFBD;
-    }
-    .navbar {
-      overflow: hidden;
-      background-color: #333;
-      text-align: center;
-    }
-    .navbar a {
-      color: #f2f2f2;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 22px;
-      display: inline-block;
-    }
-    .navbar a:hover {
-      background-color: #DDA0DD;
-      color: black;
-    }
-    .navbar a:active {
-      background-color: #DB7093;
-      color: white;
-    }
-    .navbar a[enabled]{
-      color: rgb(13, 145, 17); /* Optional: Change the color to indicate it's disabled */
-    } 
-    .navbar a[disabled]{
-      pointer-events: none;
-      color: grey; /* Optional: Change the color to indicate it's disabled */
-    } 
-    .center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-      padding: 10px;
-      border: 5px solid #F47324;
-      border-radius: 5px;
-    }
-    div.scroll-container {
-      background-color: #333;
-      overflow: auto;
-      white-space: nowrap;
-      padding: 10px;
-    }
-    div.scroll-container img {
-      padding: 10px;
-    }
-    .column {
-      float: lfeft;
-      width: 50%;
-    }
-  </style>
+<style>
+  /* CSS styles */
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #C1EFBD;
+  }
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    text-align: center;
+  }
+  .navbar a {
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+    display: inline-block;
+  }
+  .navbar a:hover {
+    background-color: #DDA0DD;
+    color: black;
+  }
+  .navbar a:active {
+    background-color: #DB7093;
+    color: white;
+  }
+  .navbar a[enabled]{
+    color: rgb(13, 145, 17); /* Optional: Change the color to indicate it's disabled */
+  } 
+  .navbar a[disabled]{
+    pointer-events: none;
+    color: grey; /* Optional: Change the color to indicate it's disabled */
+  } 
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding: 10px;
+    border: 5px solid #F47324;
+    border-radius: 5px;
+  }
+  div.scroll-container {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 10px;
+  }
+  div.scroll-container img {
+    padding: 10px;
+  }
+  .column {
+    float: lfeft;
+    width: 50%;
+  }
+</style>
 </head>
 
-
 <body>
-  <nav class="navbar">
-      <div class="container">
-          <a class="navbar-brand" href="{% url 'homepage' %}">worNDly</a>
-          <ul class="navbar-nav">
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'gameplay:desired_lang' %}">Play</a> 
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'dashboard:open_dashboard' %}">Dashboard</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="{% url 'store:open_store' %}">Store</a>
-              </li>
-              <!-- Add more navbar items as needed -->
-          </ul>
-      </div>
-  </nav>
+  <div class="navbar">
+    <a href="{% url 'homepage' %}">worNDly</a>
+    <a href="{% url 'gameplay:desired_lang' %}">Play</a> 
+    <a href="{% url 'dashboard:open_dashboard' %}">Dashboard</a>
+    <a href="{% url 'store:open_store' %}">Store</a>
+  </div>
     
   <div id="content">
     {% block content %}
