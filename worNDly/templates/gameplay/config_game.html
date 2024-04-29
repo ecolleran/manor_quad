@@ -36,7 +36,7 @@
         margin-top: 10px;
         width: 100px; 
         height: 100px; 
-        background-color: #c4c8d4; 
+        background-color: #293d7a; 
         color: #dbd5d5; 
         text-align: center; 
         line-height: 100px; 
@@ -47,16 +47,6 @@
 
 <p>Word of the day: {{ word_of_day }}</p>
 
-<form method="post">
-  {% csrf_token %}
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <button class="btn btn-outline-secondary" type="submit">Enter</button>
-    </div>
-    <input name="guess" type="text" class="form-control" placeholder="Enter your guess (5 letters)" maxlength="5" required>
-  </div>
-</form>
-
 <div>
     <p>Guesses left: {{ guesses_left }}</p>
     <p>Good letters: {{ yellow_letters }}</p>
@@ -64,59 +54,62 @@
     <p>Correct letters: {{ green_letters }}</p>
 </div>
 
-<div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <button class="btn btn-outline-secondary" type="submit">Enter your guess!</button>
+<form method="post">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary" type="submit">Enter your guess!</button>
+        </div>
+        <input type="text" class="form-control" placeholder="Should be a FIVE letter word." aria-label="" aria-describedby="basic-addon1" id = "curr_guess" name = "curr_guess">
     </div>
-    <input type="text" class="form-control" placeholder="Should be a FIVE letter word." aria-label="" aria-describedby="basic-addon1">
-  </div>
+</form>
 
 <div class="badges-container">
-    <div class="badge">Cell!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
+    <div class="badge">{{ firstguess.0 }}</div>
+    <div class="badge">{{ firstguess.1 }}</div>
+    <div class="badge">{{ firstguess.2 }}</div>
+    <div class="badge">{{ firstguess.3 }}</div>
+    <div class="badge">{{ firstguess.4 }}</div>
 </div>
 
 <div class="badges-container">
-    <div class="badge">Cell!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
+    <div class="badge">{{ secondguess.0 }}</div>
+    <div class="badge">{{ secondguess.1 }}</div>
+    <div class="badge">{{ secondguess.2 }}</div>
+    <div class="badge">{{ secondguess.3 }}</div>
+    <div class="badge">{{ secondguess.4 }}</div>
 </div>
 
 <div class="badges-container">
-    <div class="badge">Cell!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
+    <div class="badge">{{ thirdguess.0 }}</div>
+    <div class="badge">{{ thirdguess.1 }}</div>
+    <div class="badge">{{ thirdguess.2 }}</div>
+    <div class="badge">{{ thirdguess.3 }}</div>
+    <div class="badge">{{ thirdguess.4 }}</div>
 </div>
 
 <div class="badges-container">
-    <div class="badge">Cell!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
+    <div class="badge">{{ fourthguess.0 }}</div>
+    <div class="badge">{{ fourthguess.1 }}</div>
+    <div class="badge">{{ fourthguess.2 }}</div>
+    <div class="badge">{{ fourthguess.3 }}</div>
+    <div class="badge">{{ fourthguess.4 }}</div>
 </div>
 
 <div class="badges-container">
-    <div class="badge">Cell!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
+    <div class="badge">{{ fifthguess.0 }}</div>
+    <div class="badge">{{ fifthguess.1 }}</div>
+    <div class="badge">{{ fifthguess.2 }}</div>
+    <div class="badge">{{ fifthguess.3 }}</div>
+    <div class="badge">{{ fifthguess.4 }}</div>
 </div>
 
 <div class="badges-container">
-    <div class="badge">Cell!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
-    <div class="badge">CELL!</div>
+    <div class="badge">{{ lastguess.0 }}</div>
+    <div class="badge">{{ lastguess.1 }}</div>
+    <div class="badge">{{ lastguess.2 }}</div>
+    <div class="badge">{{ lastguess.3 }}</div>
+    <div class="badge">{{ lastguess.4 }}</div>
 </div>
 
 

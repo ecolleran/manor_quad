@@ -53,7 +53,7 @@ def main():
         yellow, gray, green = solution.evaluateLetters(userGuess.string)
         
         found = all(green)
-        '''if found:
+        if found:
             print()
             print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
             print()
@@ -68,13 +68,13 @@ def main():
             print('Good letters = ', yellow)
             print('Bad letters = ', gray)
             print('Correct letters = ', green)
-            print()'''
+            print()
         
-        for letter in green:
+        '''for letter in green:
             if letter :
                 print(letter, end = ' ')
             else:
-                print('_', end = ' ')
+                print('_', end = ' ')'''
         
         print()
 
