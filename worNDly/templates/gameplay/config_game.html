@@ -89,10 +89,10 @@
 </form>
 
 <div class="badges-container">
-    {% for letter in firstguess %}
-        {% if letter in green_letters %}
+    {% for letter in allguesses.0.0 %}
+        {% if letter in allguesses.0.1 %}
             <div class="greenbadge">{{ letter }}</div>
-        {% elif letter in yellow_letters %}
+        {% elif letter in allguesses.0.2 %}
             <div class="yellowbadge">{{ letter }}</div>
         {% else %}
             <div class="badge">{{ letter }}</div>
@@ -101,10 +101,10 @@
 </div>
 
 <div class="badges-container">
-    {% for letter in secondguess %}
-        {% if letter in green_letters %}
+    {% for letter in allguesses.1.0 %}
+        {% if letter in allguesses.1.1 %}
             <div class="greenbadge">{{ letter }}</div>
-        {% elif letter in yellow_letters %}
+        {% elif letter in allguesses.1.2 %}
             <div class="yellowbadge">{{ letter }}</div>
         {% else %}
             <div class="badge">{{ letter }}</div>
@@ -113,10 +113,10 @@
 </div>
 
 <div class="badges-container">
-    {% for letter in thirdguess %}
-        {% if letter in green_letters %}
+    {% for letter in allguesses.2.0 %}
+        {% if letter in allguesses.2.1 %}
             <div class="greenbadge">{{ letter }}</div>
-        {% elif letter in yellow_letters %}
+        {% elif letter in allguesses.2.2 %}
             <div class="yellowbadge">{{ letter }}</div>
         {% else %}
             <div class="badge">{{ letter }}</div>
@@ -125,10 +125,10 @@
 </div>
 
 <div class="badges-container">
-    {% for letter in fourthguess %}
-        {% if letter in green_letters %}
+    {% for letter in allguesses.3.0 %}
+        {% if letter in allguesses.3.1 %}
             <div class="greenbadge">{{ letter }}</div>
-        {% elif letter in yellow_letters %}
+        {% elif letter in allguesses.3.2 %}
             <div class="yellowbadge">{{ letter }}</div>
         {% else %}
             <div class="badge">{{ letter }}</div>
@@ -137,10 +137,10 @@
 </div>
 
 <div class="badges-container">
-    {% for letter in fifthguess %}
-        {% if letter in green_letters %}
+    {% for letter in allguesses.4.0 %}
+        {% if letter in allguesses.4.1 %}
             <div class="greenbadge">{{ letter }}</div>
-        {% elif letter in yellow_letters %}
+        {% elif letter in allguesses.4.2 %}
             <div class="yellowbadge">{{ letter }}</div>
         {% else %}
             <div class="badge">{{ letter }}</div>
@@ -149,10 +149,10 @@
 </div>
 
 <div class="badges-container">
-    {% for letter in lastguess %}
-        {% if letter in green_letters %}
+    {% for letter in allguesses.5.0 %}
+        {% if letter in allguesses.5.1 %}
             <div class="greenbadge">{{ letter }}</div>
-        {% elif letter in yellow_letters %}
+        {% elif letter in allguesses.5.2 %}
             <div class="yellowbadge">{{ letter }}</div>
         {% else %}
             <div class="badge">{{ letter }}</div>
