@@ -5,20 +5,22 @@ from .wordle import Guess, Solution
 # Create your views here.
 
 wordOfDay = ''
+
 lang_files = {'gameplay/languages/en.txt': 'English',
               'gameplay/languages/de.txt': 'German',
               'gameplay/languages/es.txt': 'Spanish',
               'gameplay/languages/fr.txt': 'French',
               'gameplay/languages/pt.txt': 'Portuguese'
 }
+
 wordSet = {}
 solution = ''
 num_guesses = 0
 guess_left = 6
 found_word = False
-yellow = ''
-gray = ''
-green = ''
+yellow = []
+gray = []
+green = []
 firstLet = ''
 firstguess = 'XXXXX'
 secondguess = 'XXXXX'
@@ -26,6 +28,14 @@ thirdguess = 'XXXXX'
 fourthguess = 'XXXXX'
 fifthguess = 'XXXXX'
 lastguess = 'XXXXX'
+
+allguesses = [['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray]
+]
 
 def desired_lang(request):
     if request.method == 'GET':
@@ -42,6 +52,7 @@ def start_game(request, lang_file = 'gameplay/languages/en.txt'):
     global guess_left
     global green, gray, yellow
     global firstguess, secondguess, thirdguess, fourthguess, fifthguess, lastguess
+    global allguesses
 
     if request.method == 'GET':
         num_guesses = 0
@@ -66,6 +77,7 @@ def start_game(request, lang_file = 'gameplay/languages/en.txt'):
                 'fourthguess': fourthguess,
                 'fifthguess': fifthguess,
                 'lastguess': lastguess,
+                'allguesses': allguesses
             })
 
         num_guesses += 1
@@ -90,6 +102,8 @@ def start_game(request, lang_file = 'gameplay/languages/en.txt'):
 
         guess_left -= 1
         yellow, gray, green = solution.evaluateLetters(guess.string)
+        allguesses[num_guesses - 1] = [guess.string, green, yellow, gray]
+        print(allguesses[num_guesses - 1])
         found_word = all(green)
         if found_word:
             print('WORD FOUND!')
@@ -119,6 +133,7 @@ def start_game(request, lang_file = 'gameplay/languages/en.txt'):
         'fourthguess': fourthguess,
         'fifthguess': fifthguess,
         'lastguess': lastguess,
+        'allguesses': allguesses  
     })
 
 def start_game_GERMAN(request):

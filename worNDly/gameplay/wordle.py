@@ -18,13 +18,18 @@ class Solution:
         self.greenLetters = greenLetters
 
     def evaluateLetters(self, guessedString): # Evaluate the solution string against the guessed one to find what letters work.
+        self.yellowLetters = []
+        self.greenLetters = ['', '', '', '', '']
+        self.grayLetters = []
+
         for index, letter in enumerate(guessedString):
-            if letter in self.string and letter not in self.yellowLetters:
-                self.yellowLetters.append(letter)
             
             for correctIndex, correctLetter in enumerate(self.string):
                 if correctLetter == letter and correctIndex == index:
                     self.greenLetters[index] = letter
+
+            if letter in self.string and letter not in self.yellowLetters and letter not in self.greenLetters:
+                self.yellowLetters.append(letter)
 
             if letter not in self.string and letter not in self.grayLetters:
                 self.grayLetters.append(letter)
