@@ -1,9 +1,11 @@
 from django.db import models
+from signin_up.models import Player
 
 # Create your models here.
 
-'''class Wallet(models.Model):
-    user = models.ForeignKey(Player, on_delete=models.CASCADE)
+class Wallet(models.Model):
+    player = models.OneToOneField(Player, on_delete=models.CASCADE)
     balance = models.IntegerField(default=0)
-    purchase_amount = models.IntegerField()
-    success= models.BooleanField()'''
+
+    def __str__(self):
+        return self.player.username

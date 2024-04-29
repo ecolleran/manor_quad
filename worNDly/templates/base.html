@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>{% block title %}WorNDly! by manor-quad{% endblock %}</title>
-  <img src="{% static 'worNDly_logo.jpg' %}" alt="Banner Image" style="width:2300px;height:200px;">
+  <img src="{% static 'worNDly/worNDly_logo.jpg' %}" alt="Banner Image" style="width:2300px;height:200px;">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
@@ -79,7 +79,7 @@
     <a href="{% url 'homepage' %}">worNDly</a>
     <a href="{% url 'gameplay:desired_lang' %}">Play</a> 
     <a href="{% url 'dashboard:open_dashboard' %}">Dashboard</a>
-    <a href="{% url 'store:open_store' %}">Store</a>
+    <a href="{% url 'store:purchase_games' %}">Store</a>
   </div>
     
   <div id="content">

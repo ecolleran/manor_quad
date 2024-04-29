@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}WorNDly by manor-quad!{% endblock %}
+
+{% block content %}
+
+<head>
+    <title>Purchase Games</title>
+</head>
+<body>
+    <h2>Current Balance: {{ wallet.balance }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="num_games">Number of Games to Purchase:</label>
+        <input type="number" name="num_games" id="num_games" min="1" required>
+        <button type="submit">Purchase</button>
+    </form>
+    {% for message in messages %}
+        <div>{{ message }}</div>
+    {% endfor %}
+</body>
+
+
+{% endblock %}
