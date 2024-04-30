@@ -31,21 +31,6 @@ def create_new_user(request):
         messages.success(request, 'User created successfully. Please log in.')
         return redirect('/')
     
-'''
-def create_new_user(request):
-    if request.method == 'GET':
-        return render(request, 'signin_up/sign_in.html')
-    else:
-        print(request.POST)
-        for p in Player.objects.all():
-            if p.username == request.POST['username']:
-                print('User already taken')
-                return render(request, 'signin_up/sign_in.html')
-        
-
-        player = Player.objects.create(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'])
-        return redirect('/', {'new_user': '', 'new_name': '', })
-'''
 # Feature 1.2: Sign-in
 def login_users(request):
     if request.method == 'GET':
@@ -75,41 +60,16 @@ def login_users(request):
             login(request, user)
             new_user = True
             new_name = user.username
-            # Redirect to homepage or any other page after login
+            # Redirect to homepage
             return render(request, 'homepage.html', {'new_user': new_user, 'new_name': new_name})
         else: 
             messages.error(request, 'Invalid username or password.')
             return render(request, 'signin_up/login_user.html')
 
-
-'''
-def login_users(request):
-    if request.method == 'GET':
-        return render(request, "signin_up/login_user.html")
-    else:
-        print(request.POST)
-        for p in Player.objects.all():
-            if p.username == request.POST['username'] and p.password == request.POST['password']:
-                logged_in = Player(username = request.POST['username'], password = request.POST['password'])
-                new_user = True
-                new_name = logged_in.username
-                print(new_user, new_name)
-                return render(request, 'homepage.html', {'new_user': new_user, 'new_name': new_name})
-        
-        return render(request, "signin_up/login_user.html")
-'''
-
 # Feature 1.3: Sign-out
 def logout_users(request):
-    print('logging out')
+    print('Logging out...')
     logout(request)
     return redirect('/')
 
-'''
-def logout_users(request):
-    # logout(request)
-    print('logging out')
-
-    return render(request, 'homepage.html', {'new_user': False, 'new_name': ''})
-    '''
 
