@@ -1,14 +1,37 @@
-from django.views.generic import ListView, DetailView, CreateView
-from django.views import View
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from .models import Player
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.models import User
 
-# Create your views here.
+def homepage(request):
+    return render(request, 'signin_up/homepage.html')
 
-''' Feature 1.1: Create User '''
+# Feature 1.1: Create User
+def create_new_user(request):
+    if request.method == 'GET':
+        return render(request, 'signin_up/sign_in.html')
+    else:
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        # Check if username is already taken
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username is already taken.')
+            return render(request, 'signin_up/sign_in.html')
+        
+        # Create user
+        new_user = User.objects.create_user(username=username, email=email, password=password)
+        
+        # Print user information
+        print("New User Created:")
+        print("Username:", new_user.username)
+        print("Email:", new_user.email)
+            
+        messages.success(request, 'User created successfully. Please log in.')
+        return redirect('/')
+    
+'''
 def create_new_user(request):
     if request.method == 'GET':
         return render(request, 'signin_up/sign_in.html')
@@ -22,14 +45,44 @@ def create_new_user(request):
 
         player = Player.objects.create(username=request.POST['username'], email=request.POST['email'], password=request.POST['password'])
         return redirect('/', {'new_user': '', 'new_name': '', })
+'''
+# Feature 1.2: Sign-in
+def login_users(request):
+    if request.method == 'GET':
+        return render(request, 'signin_up/login_user.html')
+    else:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-'''class CreateNewPlayer(View):
-    def get(request):
-        return render(request, 'user/login.html', {'form': UserForm(), 'user': request.user.is_authenticated})'''
+        # Debug prints
+        # print("Username:", username)
+        # print("Password:", password)
 
-    
+        # Check if username and password are provided
+        if not username or not password:
+            messages.error(request, 'Username and password are required.')
+            return render(request, 'signin_up/login_user.html')
 
-''' Feature 1.2: Sign-in '''
+        # Authenticate user
+        user = authenticate(username=username, password=password)
+        
+        # Debug print
+        print("Authenticated User:", user)
+        
+        # Check if authentication failed
+        if user is not None:
+            # Authentication successful
+            login(request, user)
+            new_user = True
+            new_name = user.username
+            # Redirect to homepage or any other page after login
+            return render(request, 'homepage.html', {'new_user': new_user, 'new_name': new_name})
+        else: 
+            messages.error(request, 'Invalid username or password.')
+            return render(request, 'signin_up/login_user.html')
+
+
+'''
 def login_users(request):
     if request.method == 'GET':
         return render(request, "signin_up/login_user.html")
@@ -44,17 +97,19 @@ def login_users(request):
                 return render(request, 'homepage.html', {'new_user': new_user, 'new_name': new_name})
         
         return render(request, "signin_up/login_user.html")
+'''
 
-#class LoginView(View):
-    #pass
+# Feature 1.3: Sign-out
+def logout_users(request):
+    print('logging out')
+    logout(request)
+    return redirect('/')
 
-''' Feature 1.3: Sign-out '''
+'''
 def logout_users(request):
     # logout(request)
     print('logging out')
 
     return render(request, 'homepage.html', {'new_user': False, 'new_name': ''})
-
-#class LogoutView(View):
-    #pass
+    '''
 

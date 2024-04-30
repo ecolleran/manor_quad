@@ -1,5 +1,4 @@
 from django.db import models
-from signin_up.models import Player
 
 
 
