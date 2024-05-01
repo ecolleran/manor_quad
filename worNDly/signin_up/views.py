@@ -39,10 +39,6 @@ def login_users(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # Debug prints
-        # print("Username:", username)
-        # print("Password:", password)
-
         # Check if username and password are provided
         if not username or not password:
             messages.error(request, 'Username and password are required.')
@@ -52,7 +48,13 @@ def login_users(request):
         user = authenticate(username=username, password=password)
         
         # Debug print
-        print("Authenticated User:", user)
+        print("Signing in...")
+        print("Username:", username)
+        # print("Password:", password)
+        if user:
+            print("Authenticated User: True")
+        else:
+            print("Authenticated User: False")
         
         
         # Check if authentication failed
@@ -69,7 +71,7 @@ def login_users(request):
 
 # Feature 1.3: Sign-out
 def logout_users(request):
-    print('Logging out...')
+    print(f'Signing out...')
     logout(request)
     return redirect('/')
 
