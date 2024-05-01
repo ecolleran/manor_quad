@@ -4,13 +4,14 @@ from gameplay.models import GamesPlayed
 import datetime
 
 def open_dashboard(request):
+    #get the plays statistics for the player:
     selected_data_view = request.GET.get('data-view', 'all')  # Get selected data view from the form
 
     listOfPlays = []
     listOfPlaysYEAR = []
     listOfPlaysMONTH = []
     listOfPlaysWEEK = []
-
+    user = request.user
     for g in GamesPlayed.objects.all():
         if request.user == g.player:
             listOfPlays.append(g)
@@ -24,16 +25,7 @@ def open_dashboard(request):
         if request.user == g.player and g.game_play_date.isocalendar()[1] == datetime.datetime.now().isocalendar()[1]:
             listOfPlaysWEEK.append(g)
 
-    # Pass the selected data view and relevant data to the template
-    return render(request, 'dashboard/firstdash.html', {
-        'selected_data_view': selected_data_view,
-        'listOfPlays': listOfPlays,
-        'listOfPlaysYEAR': listOfPlaysYEAR,
-        'listOfPlaysMONTH': listOfPlaysMONTH,
-        'listOfPlaysWEEK': listOfPlaysWEEK
-    })
-
-def show_statistics(request):
+    #get the percentages and guesses distribution:
     tot = 0
     succ = 0
     guess_stats = [0,0,0,0,0,0]
@@ -44,7 +36,15 @@ def show_statistics(request):
             guess_stats[g.num_guesses_that_occurred-1] +=1
         
     
-    perc = (succ / tot) * 100
-
-    
-    return render(request, 'dashboard/stats.html', {'tot': tot, 'perc': str(perc) + '%', 'guess_stats': guess_stats})
+    perc = round((succ / tot) * 100, 1)
+    # Pass the selected data view and relevant data to the template
+    return render(request, 'dashboard/firstdash.html', {
+        'selected_data_view': selected_data_view,
+        'listOfPlays': listOfPlays,
+        'listOfPlaysYEAR': listOfPlaysYEAR,
+        'listOfPlaysMONTH': listOfPlaysMONTH,
+        'listOfPlaysWEEK': listOfPlaysWEEK,
+        'tot': tot, 
+        'perc': str(perc) + '%', 
+        'guess_stats': guess_stats
+    })
