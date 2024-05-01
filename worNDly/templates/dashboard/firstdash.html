@@ -1,28 +1,40 @@
 {% extends "base.html" %}
-
 {% block title %}WorNDly by manor-quad!{% endblock %}
-
 {% block content %}
 
-<p>All past plays</p>
-{% for l in listOfPlays %}
-    <div>{{ l }}</div>
-{% endfor %}
+<!-- Dropdown menu for selecting data view -->
+<form method="get">
+    <label for="data-view">Select Data View:</label>
+    <select id="data-view" name="data-view">
+        <option value="all">All</option>
+        <option value="week">This Week</option>
+        <option value="month">This Month</option>
+        <option value="year">This Year</option>
+    </select>
+    <button type="submit">Show</button>
+</form>
 
-<p>This year's plays</p>
-{% for l in listOfPlaysYEAR %}
-    <div>{{ l }}</div>
-{% endfor %}
-
-<p>This month's plays</p>
-{% for l in listOfPlaysMONTH %}
-    <div>{{ l }}</div>
-{% endfor %}
-
-<p>This week's plays</p>
-{% for l in listOfPlaysWEEK %}
-    <div>{{ l }}</div>
-{% endfor %}
+<!-- Display selected data view -->
+{% if selected_data_view == 'all' %}
+    <p>All past plays</p>
+    {% for l in listOfPlays %}
+        <div>{{ l }}</div>
+    {% endfor %}
+{% elif selected_data_view == 'year' %}
+    <p>This year's plays</p>
+    {% for l in listOfPlaysYEAR %}
+        <div>{{ l }}</div>
+    {% endfor %}
+{% elif selected_data_view == 'month' %}
+    <p>This month's plays</p>
+    {% for l in listOfPlaysMONTH %}
+        <div>{{ l }}</div>
+    {% endfor %}
+{% elif selected_data_view == 'week' %}
+    <p>This week's plays</p>
+    {% for l in listOfPlaysWEEK %}
+        <div>{{ l }}</div>
+    {% endfor %}
+{% endif %}
 
 {% endblock %}
-
