@@ -4,6 +4,7 @@ from .wordle import Guess, Solution
 from .models import GamesPlayed
 from django.contrib.auth.models import User
 import datetime
+from django.shortcuts import render
 
 
 # Create your views here.
@@ -62,9 +63,11 @@ def start_game(request, lang_file):
     global firstguess, secondguess, thirdguess, fourthguess, fifthguess, lastguess
     global allguesses
     global gameEnded
+    global error_message
 
     if request.method == 'GET':
         gameEnded = False
+        error_message = None
 
         num_guesses = 0
         wordSet = readWordSet(lang_file)
@@ -142,24 +145,11 @@ def start_game(request, lang_file):
             })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         if request.POST['curr_guess'].upper() not in wordSet or len(request.POST['curr_guess']) != 5:
+            error_message = 'Invalid word. Please enter a valid five-letter word.'
             print('Invalid word!', request.POST['curr_guess'])
             return render(request, 'gameplay/config_game.html', {
+                'error_message': error_message,
                 'guesses_left': guess_left,
                 'language_selected': lang_files[lang_file],
                 'word_of_day': wordOfDay,
@@ -228,8 +218,6 @@ def start_game(request, lang_file):
         print(game)
         print(game.player, game.num_guesses_that_occurred)
         game.save()
-    
-
 
     # Render the config_game.html template with necessary context
     return render(request, 'gameplay/config_game.html', {

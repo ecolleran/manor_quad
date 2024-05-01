@@ -80,9 +80,9 @@
 <div style="text-align: center;">
     <div>
         <p>Guesses left: {{ guesses_left }}</p>
-        <p>Good letters: {{ yellow_letters }}</p>
-        <p>Bad letters: {{ gray_letters }}</p>
-        <p>Correct letters: {{ green_letters }}</p>
+        <!-- <p>Good letters: {{ yellow_letters }}</p> -->
+        <!-- <p>Bad letters: {{ gray_letters }}</p> -->
+        <!-- <p>Correct letters: {{ green_letters }}</p> -->
     </div>
     <form method="post">
         {% csrf_token %}
@@ -90,6 +90,9 @@
             <input type="text" class="form-control" placeholder="Should be a FIVE letter word." aria-label="" aria-describedby="basic-addon1" id="curr_guess" name="curr_guess"> <!-- Adjust font size and width -->
         </div>
         <button class="btn btn-enter-guess" type="submit">Enter your guess!</button>
+        {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
     </form>
 </div>
 
