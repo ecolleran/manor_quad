@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}WorNDly by manor-quad!{% endblock %}
+
+{% block content %}
+
+<p>All past plays</p>
+{% for l in listOfPlays %}
+    <div>{{ l }}</div>
+{% endfor %}
+
+<p>This year's plays</p>
+{% for l in listOfPlaysYEAR %}
+    <div>{{ l }}</div>
+{% endfor %}
+
+<p>This month's plays</p>
+{% for l in listOfPlaysMONTH %}
+    <div>{{ l }}</div>
+{% endfor %}
+
+<p>This week's plays</p>
+{% for l in listOfPlaysWEEK %}
+    <div>{{ l }}</div>
+{% endfor %}
+
+{% endblock %}
+

@@ -12,5 +12,9 @@ class GamesPlayed(models.Model):
     game_play_date = models.DateField() # Date field
 
     def __str__(self):
-        return f'{self.player} with {self.num_guesses_that_occurred} for {self.wordOfDayz}'
+        if self.won_or_nah:
+            str_to_add = 'PASS'
+        else:
+            str_to_add = 'FAIL'
+        return f'{self.player}, on {self.game_play_date}: {str_to_add} in {self.num_guesses_that_occurred} for {self.wordOfDayz}'
     
