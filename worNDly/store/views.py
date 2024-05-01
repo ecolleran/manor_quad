@@ -48,7 +48,7 @@ def user_pay(access_token, email, amount):
    }
    data = {"amount": amount} # non-negative integer value to be decreased
    # Make a POST request with the authorization header and data payload
-   api_response = requests.post(f"https://jcssantos.pythonanywhere.com/api/group10/group10/player/ecoller2@nd.edu/pay", headers=headers, data=data)
+   api_response = requests.post(f"https://jcssantos.pythonanywhere.com/api/group10/group10/player/{email}/pay", headers=headers, data=data)
 
    if api_response.status_code == 200:
        # Process the data from the API
@@ -66,9 +66,11 @@ def purchase_games(request):
     if not access_token:
         messages.error(request, 'Failed to retrieve access token. Please try again later.')
     
-    user_balance = view_balance_for_user(access_token=access_token, email="ecoller2@nd.edu")
+    user_balance = view_balance_for_user(access_token=access_token, email=player)
     print(user_balance)
-    bal=user_balance['amount']
+    bal=request.Wallet.balance
+    print(bal)
+    #user_balance['amount']
     
     if request.method == 'POST':
         num_games = int(request.POST.get('num_games', 0))
