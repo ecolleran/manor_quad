@@ -36,12 +36,15 @@ def open_dashboard(request):
 def show_statistics(request):
     tot = 0
     succ = 0
+    guess_stats = [0,0,0,0,0,0]
     for g in GamesPlayed.objects.filter(player = request.user):
         tot += 1
         if g.won_or_nah:
             succ += 1
+            guess_stats[g.num_guesses_that_occurred-1] +=1
+        
     
     perc = (succ / tot) * 100
 
     
-    return render(request, 'dashboard/stats.html', {'perc': str(perc) + '%'})
+    return render(request, 'dashboard/stats.html', {'tot': tot, 'perc': str(perc) + '%', 'guess_stats': guess_stats})
