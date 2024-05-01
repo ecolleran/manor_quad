@@ -43,8 +43,8 @@
 
 </style>
 
-{% if new_user %}
-<h2 style="text-align: center; margin-bottom: 20px;">{{ new_name }}, welcome to WorNDly!</h2>
+{% if user.is_authenticated %}
+<h2 style="text-align: center; margin-bottom: 20px;">{{ user.username }}, welcome to WorNDly!</h2>
 <div class="center">
     <button><a href="{% url 'logout' %}" style="text-decoration: none; color: inherit;">Sign Out.</a></button>
 </div>

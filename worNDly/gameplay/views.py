@@ -21,6 +21,7 @@ found_word = False
 yellow = []
 gray = []
 green = []
+lang_file = ''
 firstLet = ''
 firstguess = 'XXXXX'
 secondguess = 'XXXXX'
@@ -43,7 +44,7 @@ def desired_lang(request):
     else:
         print(request.POST)
 
-def start_game(request, lang_file = 'gameplay/languages/en.txt'):
+def start_game(request, lang_file):
     global wordOfDay
     global wordSet
     global solution
@@ -57,6 +58,7 @@ def start_game(request, lang_file = 'gameplay/languages/en.txt'):
     if request.method == 'GET':
         num_guesses = 0
         wordSet = readWordSet(lang_file)
+        print('word from', lang_file)
         wordOfDay = random.choice(list(wordSet))
         solution = Solution(wordOfDay, len(wordOfDay))
         print(wordOfDay, solution)
@@ -65,7 +67,7 @@ def start_game(request, lang_file = 'gameplay/languages/en.txt'):
             print('Invalid word!', request.POST['curr_guess'])
             return render(request, 'gameplay/config_game.html', {
                 'guesses_left': guess_left,
-                'language_selected': 'English',
+                'language_selected': lang_files[lang_file],
                 'word_of_day': wordOfDay,
                 'solution': solution,
                 'yellow_letters': yellow,
@@ -139,15 +141,19 @@ def start_game(request, lang_file = 'gameplay/languages/en.txt'):
 def start_game_GERMAN(request):
     return start_game(request, 'gameplay/languages/de.txt')
 
+def start_game_SPANISH(request):
+    return start_game(request, 'gameplay/languages/es.txt')
+
+def start_game_PORT(request):
+    return start_game(request, 'gameplay/languages/pt.txt')
+
+def start_game_FRENCH(request):
+    return start_game(request, 'gameplay/languages/fr.txt')
+
+def start_game_ENGLISH(request):
+    return start_game(request, 'gameplay/languages/en.txt')
+
 def readWordSet(language):
     # Define file paths based on selected language
-    language_files={
-        'GERMAN': 'gameplay/languages/de.txt',
-        'ENGLISH': 'gameplay/languages/en.txt',
-        'SPANISH': 'gameplay/languages/es.txt',
-        'PORTUGUESE': 'gameplay/languages/pt.txt',
-        'FRENCH': 'gameplay/languages/fr.txt',
-    }
 
-    file=language_files.get(language, "gameplay/languages/en.txt")
-    return {word.strip() for word in open(file)}
+    return {word.strip().upper() for word in open(language)}

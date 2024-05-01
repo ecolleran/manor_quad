@@ -54,6 +54,7 @@ def login_users(request):
         # Debug print
         print("Authenticated User:", user)
         
+        
         # Check if authentication failed
         if user is not None:
             # Authentication successful
