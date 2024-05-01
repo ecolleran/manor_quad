@@ -6,8 +6,9 @@ from django.contrib.auth.decorators import login_required
 import requests
 
 class BuyGamePlaysForm(forms.Form):
-    num_plays = forms.IntegerField(label='Number of game plays to purchase')
+    num_plays = forms.IntegerField(label='Number of game plays to purchase (number > 1)')
 
+    
 def view_balance(access_token, email):
    # Use the access token to make an authenticated request
    headers = {'Authorization': f'Bearer {access_token}'}
@@ -30,7 +31,7 @@ def buy_game_plays(access_token, email, num_plays):
         response = requests.post(url, headers=headers, json=data)
         if response.status_code == 200:
             new_balance = response.json()["new_amount"]
-            return f"Successfully purchased {num_plays} extra game plays. New balance: {new_balance}"
+            return f"Successfully purchased {num_plays} extra game plays. New coin balance: {new_balance}"
         else:
             return response.json()["message"]  # Error message from API
     else:
