@@ -3,18 +3,14 @@
 {% block title %}WorNDly by manor-quad!{% endblock %}
 
 {% block content %}
+  <h2>Buy Game Plays</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Purchase</button>
+  </form>
 
-<head>
-    <title>Purchase Games</title>
-</head>
-<body>
-    <h2>Current Balance: {{ wallet.balance }}</h2>
-    <form method="post">
-        {% csrf_token %}
-        <label for="num_games">Number of Games to Purchase:</label>
-        <input type="number" name="num_games" id="num_games" min="1" required>
-        <button type="submit">Purchase</button>
-    </form>
-</body>
-
+  {% if response %}
+    <p>{{ response }}</p>
+  {% endif %}
 {% endblock %}
