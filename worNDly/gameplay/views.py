@@ -1,10 +1,16 @@
 from django.shortcuts import render
 import random
 from .wordle import Guess, Solution
+from .models import GamesPlayed
+from django.contrib.auth.models import User
+import datetime
+
 
 # Create your views here.
 
 wordOfDay = ''
+
+max_plays = 3
 
 lang_files = {'gameplay/languages/en.txt': 'English',
               'gameplay/languages/de.txt': 'German',
@@ -29,6 +35,7 @@ thirdguess = 'XXXXX'
 fourthguess = 'XXXXX'
 fifthguess = 'XXXXX'
 lastguess = 'XXXXX'
+gameEnded = False
 
 allguesses = [['XXXXX', green, yellow, gray],
               ['XXXXX', green, yellow, gray],
@@ -54,14 +61,38 @@ def start_game(request, lang_file):
     global green, gray, yellow
     global firstguess, secondguess, thirdguess, fourthguess, fifthguess, lastguess
     global allguesses
+    global gameEnded
 
     if request.method == 'GET':
+        gameEnded = False
+
         num_guesses = 0
         wordSet = readWordSet(lang_file)
         print('word from', lang_file)
         wordOfDay = random.choice(list(wordSet))
         solution = Solution(wordOfDay, len(wordOfDay))
         print(wordOfDay, solution)
+        guess_left = 6
+        found_word = False
+        yellow = []
+        gray = []
+        green = []
+        allguesses = [['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray],
+              ['XXXXX', green, yellow, gray]
+                ]
+        
+        firstguess = 'XXXXX'
+        secondguess = 'XXXXX'
+        thirdguess = 'XXXXX'
+        fourthguess = 'XXXXX'
+        fifthguess = 'XXXXX'
+        lastguess = 'XXXXX'
+
+
     elif num_guesses < 6 and request.method == 'POST' and not found_word:
         if request.POST['curr_guess'].upper() not in wordSet or len(request.POST['curr_guess']) != 5:
             print('Invalid word!', request.POST['curr_guess'])
@@ -83,7 +114,6 @@ def start_game(request, lang_file):
             })
 
         num_guesses += 1
-        
         print(request.POST)
         print('num_guesses', num_guesses)
         guessedString = request.POST['curr_guess']
@@ -111,12 +141,30 @@ def start_game(request, lang_file):
             print('WORD FOUND!')
             guess_left = f'Well done! You won in {num_guesses} guesses.'
 
+        if found_word or num_guesses == 6:
+            gameEnded = True
+
+
     elif num_guesses == 6:
         guess_left = 'NO GUESSES LEFT!'
+        #gameEnded = True
+
     
     elif found_word:
         print('WORD FOUND!')
         guess_left = f'Well done! You won in {num_guesses} guesses.'
+        #gameEnded = True
+    
+    if gameEnded:
+        print('And now your game has ended')
+
+        game = GamesPlayed(player = request.user, wordOfDayz = wordOfDay, won_or_nah = found_word,
+                            num_guesses_that_occurred = num_guesses, game_play_date = datetime.date.today())
+
+        
+        print(game)
+        print(game.player, game.num_guesses_that_occurred)
+        game.save()
     
 
 
@@ -155,5 +203,4 @@ def start_game_ENGLISH(request):
 
 def readWordSet(language):
     # Define file paths based on selected language
-
     return {word.strip().upper() for word in open(language)}

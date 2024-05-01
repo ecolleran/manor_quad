@@ -78,10 +78,10 @@
 <body>
   <div class="navbar">
     <a href="{% url 'homepage' %}">worNDly</a>
-    <a href="{% url 'gameplay:desired_lang' %}">Play</a> 
-    <a href="{% url 'dashboard:open_dashboard' %}">Dashboard</a>
-    <a href="{% url 'store:purchase_games' %}">Store</a>
     {% if user.is_authenticated %}
+      <a href="{% url 'gameplay:desired_lang' %}">Play</a> 
+      <a href="{% url 'dashboard:open_dashboard' %}">Dashboard</a>
+      <a href="{% url 'store:purchase_games' %}">Store</a>
       <a href="#">Hello, {{ user.username }}!</a>
     {% endif %}
   </div>
