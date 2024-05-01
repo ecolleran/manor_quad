@@ -11,7 +11,6 @@ def open_dashboard(request):
     listOfPlaysYEAR = []
     listOfPlaysMONTH = []
     listOfPlaysWEEK = []
-    user = request.user
     for g in GamesPlayed.objects.all():
         if request.user == g.player:
             listOfPlays.append(g)
@@ -28,6 +27,7 @@ def open_dashboard(request):
     #get the percentages and guesses distribution:
     tot = 0
     succ = 0
+    perc = 0
     guess_stats = [0,0,0,0,0,0]
     for g in GamesPlayed.objects.filter(player = request.user):
         tot += 1
@@ -35,8 +35,8 @@ def open_dashboard(request):
             succ += 1
             guess_stats[g.num_guesses_that_occurred-1] +=1
         
-    
-    perc = round((succ / tot) * 100, 1)
+    if tot:
+        perc = round((succ / tot) * 100, 1)
     # Pass the selected data view and relevant data to the template
     return render(request, 'dashboard/firstdash.html', {
         'selected_data_view': selected_data_view,
