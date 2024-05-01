@@ -10,7 +10,7 @@ import datetime
 
 wordOfDay = ''
 
-max_plays = 3
+max_plays = 60
 
 lang_files = {'gameplay/languages/en.txt': 'English',
               'gameplay/languages/de.txt': 'German',
@@ -92,8 +92,71 @@ def start_game(request, lang_file):
         fifthguess = 'XXXXX'
         lastguess = 'XXXXX'
 
+        numGamesPlayedThusFar = 0
+        for game_played in GamesPlayed.objects.all():
+            if request.user == game_played.player and game_played.game_play_date == datetime.date.today():
+                numGamesPlayedThusFar += 1
+            
+        if numGamesPlayedThusFar >= max_plays:
+            return render(request, 'gameplay/config_game.html', {
+                'guesses_left': 'All plays used up!',
+                'language_selected': lang_files[lang_file],
+                'word_of_day': wordOfDay,
+                'solution': solution,
+                'yellow_letters': yellow,
+                'gray_letters': gray,
+                'green_letters': green,
+                'firstguess': firstguess,
+                'secondguess': secondguess,
+                'thirdguess': thirdguess,
+                'fourthguess': fourthguess,
+                'fifthguess': fifthguess,
+                'lastguess': lastguess,
+                'allguesses': allguesses  
+            })
+
+
 
     elif num_guesses < 6 and request.method == 'POST' and not found_word:
+        numGamesPlayedThusFar = 0
+        for game_played in GamesPlayed.objects.all():
+            if request.user == game_played.player and game_played.game_play_date == datetime.date.today():
+                numGamesPlayedThusFar += 1
+            
+        if numGamesPlayedThusFar >= max_plays:
+            return render(request, 'gameplay/config_game.html', {
+                'guesses_left': 'All plays used up!',
+                'language_selected': lang_files[lang_file],
+                'word_of_day': wordOfDay,
+                'solution': solution,
+                'yellow_letters': yellow,
+                'gray_letters': gray,
+                'green_letters': green,
+                'firstguess': firstguess,
+                'secondguess': secondguess,
+                'thirdguess': thirdguess,
+                'fourthguess': fourthguess,
+                'fifthguess': fifthguess,
+                'lastguess': lastguess,
+                'allguesses': allguesses  
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         if request.POST['curr_guess'].upper() not in wordSet or len(request.POST['curr_guess']) != 5:
             print('Invalid word!', request.POST['curr_guess'])
             return render(request, 'gameplay/config_game.html', {
