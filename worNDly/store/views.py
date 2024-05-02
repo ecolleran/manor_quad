@@ -39,12 +39,20 @@ def buy_game_plays(access_token, email, num_plays):
 
 @login_required
 def purchase_games(request):
+    email = request.user.email
+    access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzMjQ0MTU1LCJpYXQiOjE3MTQ2MDQxNTUsImp0aSI6IjJiYmE5YzIyNjg3OTQzNjRiNjQxOGIxMTQ3MWYzZGRlIiwidXNlcl9pZCI6ODV9.u923TBU1kxjBtstv-5Dt8RptBIaxTIC3UP4p5Du8m5k"
+    if request.method == 'GET':
+        num_games = view_balance(access_token, email)  # Retrieve balance directly
+        print(num_games)
+        if num_games is not None:  # Ensure num_games is not None
+            return render(request, 'store/purchase_games.html', {
+                'num_games': num_games  # Pass the balance value to the template
+            })
+    
     if request.method == 'POST':
         form = BuyGamePlaysForm(request.POST)
         if form.is_valid():
-            email = request.user.email
             num_plays = form.cleaned_data['num_plays']
-            access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzMjQ0MTU1LCJpYXQiOjE3MTQ2MDQxNTUsImp0aSI6IjJiYmE5YzIyNjg3OTQzNjRiNjQxOGIxMTQ3MWYzZGRlIiwidXNlcl9pZCI6ODV9.u923TBU1kxjBtstv-5Dt8RptBIaxTIC3UP4p5Du8m5k"
             response = buy_game_plays(access_token, email, num_plays)
             return render(request, 'store/purchase_games.html', {'form': form, 'response': response}) # Pass the form back to the template
     else:

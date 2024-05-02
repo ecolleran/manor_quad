@@ -3,7 +3,33 @@
 {% block title %}WorNDly by manor-quad!{% endblock %}
 
 {% block content %}
-  <h2>Buy Game Plays</h2>
+<style>
+  /* CSS styles */
+  body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+  }
+  input {
+    font-size: 20px;
+    border: 2px solid pink;
+    border-radius: 4px;
+    padding: 20px;
+  }
+  .center {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
+<h2 style="text-align: center; margin-bottom: 20px;" >Buy Game Plays!</h2>
+
+<div class="center"</div>
+  <p></p>
+  <h3>Welcome to the Krato$Coin store, {{ user.username }}.</h3>
+  <h3> Your coin balance is: {{ num_games }}</h3>
+
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -13,4 +39,6 @@
   {% if response %}
     <p>{{ response }}</p>
   {% endif %}
+</div>
+
 {% endblock %}
