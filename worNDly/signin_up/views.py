@@ -68,11 +68,13 @@ def login_users(request):
             # Redirect to homepage
             
             
+            if GamesCounter.objects.filter(player=user, todaysDate=datetime.date.today()).exists():
+                print('Already in db.')
+            else:
+                personPlays = GamesCounter(player = user, todaysDate = datetime.date.today())
+                personPlays.save()
 
-            personPlays = GamesCounter(player = user, todaysDate = datetime.date.today())
-            personPlays.save()
-
-            print(personPlays)
+                print(personPlays)
             return render(request, 'homepage.html', {'new_user': new_user, 'new_name': new_name})
         else: 
             messages.error(request, 'Invalid username or password.')
