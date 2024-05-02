@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
+from store.models import GamesCounter
+import datetime
 
 def homepage(request):
     return render(request, 'signin_up/homepage.html')
@@ -64,6 +66,13 @@ def login_users(request):
             new_user = True
             new_name = user.username
             # Redirect to homepage
+            
+            
+
+            personPlays = GamesCounter(player = user, todaysDate = datetime.date.today())
+            personPlays.save()
+
+            print(personPlays)
             return render(request, 'homepage.html', {'new_user': new_user, 'new_name': new_name})
         else: 
             messages.error(request, 'Invalid username or password.')
