@@ -30,7 +30,7 @@ Here is the list of steps to get our project running.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/ecolleran/manor_quad.git
+   git clone git@github.com:ecolleran/manor_quad.git
    ```
 2. From worNDly directory, run (where [PORT] is your own personal port number):
    ```sh
