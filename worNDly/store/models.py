@@ -9,3 +9,8 @@ class Wallet(models.Model):
 
     def __str__(self):
         return self.player.username
+
+class GamesCounter(models.Model):
+    gamesForToday = models.IntegerField(default = 3)
+    player = models.ForeignKey(User, on_delete=models.CASCADE)
+    todaysDate = models.DateField()
