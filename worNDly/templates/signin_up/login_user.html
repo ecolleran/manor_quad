@@ -62,5 +62,10 @@
     <p></p>
     <!-- Back button -->
     <a href="{% url 'homepage' %}" class="button">Back to Home</a>
+
+    <p></p>
+    {% for message in messages %}
+      <div>{{ message }}</div>
+    {% endfor %}
 </div>
 {% endblock %}
