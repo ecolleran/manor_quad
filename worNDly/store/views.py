@@ -4,6 +4,9 @@ from django.shortcuts import render
 from django import forms
 from django.contrib.auth.decorators import login_required
 import requests
+from django.contrib.auth.models import User
+from .models import GamesCounter
+import datetime
 
 class BuyGamePlaysForm(forms.Form):
     num_plays = forms.IntegerField(label='Number of game plays to purchase (number > 1)')
@@ -31,6 +34,14 @@ def buy_game_plays(access_token, email, num_plays):
         response = requests.post(url, headers=headers, json=data)
         if response.status_code == 200:
             new_balance = response.json()["new_amount"]
+            the_user = User.objects.filter(email = email)[0]
+            the_gamePlayed = GamesCounter.objects.filter(player = the_user, todaysDate = datetime.date.today())[0]
+            the_gamePlayed.gamesForToday += num_plays
+            print(the_gamePlayed)
+            the_gamePlayed.save()
+
+
+             
             return f"Successfully purchased {num_plays} extra game plays. New coin balance: {new_balance}"
         else:
             return response.json()["message"]  # Error message from API

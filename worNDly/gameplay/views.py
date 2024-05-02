@@ -5,13 +5,15 @@ from .models import GamesPlayed
 from django.contrib.auth.models import User
 import datetime
 from django.shortcuts import render
+from store.models import GamesCounter
 
 
 # Create your views here.
 
 wordOfDay = ''
 
-max_plays = 60
+
+
 
 lang_files = {'gameplay/languages/en.txt': 'English',
               'gameplay/languages/de.txt': 'German',
@@ -53,6 +55,8 @@ def desired_lang(request):
         print(request.POST)
 
 def start_game(request, lang_file):
+    max_plays = GamesCounter.objects.filter(player = request.user, todaysDate = datetime.date.today())[0].gamesForToday
+    print('max_plays', max_plays)
     global wordOfDay
     global wordSet
     global solution
@@ -115,7 +119,9 @@ def start_game(request, lang_file):
                 'fourthguess': fourthguess,
                 'fifthguess': fifthguess,
                 'lastguess': lastguess,
-                'allguesses': allguesses  
+                'allguesses': allguesses,
+                'max_plays': max_plays,
+                'numGamesPlayedThusFar': numGamesPlayedThusFar,
             })
 
 
@@ -141,7 +147,9 @@ def start_game(request, lang_file):
                 'fourthguess': fourthguess,
                 'fifthguess': fifthguess,
                 'lastguess': lastguess,
-                'allguesses': allguesses  
+                'allguesses': allguesses,
+                'max_plays': max_plays, 
+                'numGamesPlayedThusFar': numGamesPlayedThusFar, 
             })
 
 
@@ -163,7 +171,9 @@ def start_game(request, lang_file):
                 'fourthguess': fourthguess,
                 'fifthguess': fifthguess,
                 'lastguess': lastguess,
-                'allguesses': allguesses
+                'allguesses': allguesses,
+                'max_plays': max_plays,
+                'numGamesPlayedThusFar': numGamesPlayedThusFar,
             })
 
         num_guesses += 1
@@ -234,7 +244,9 @@ def start_game(request, lang_file):
         'fourthguess': fourthguess,
         'fifthguess': fifthguess,
         'lastguess': lastguess,
-        'allguesses': allguesses  
+        'allguesses': allguesses,
+        'max_plays': max_plays,  
+        'numGamesPlayedThusFar': numGamesPlayedThusFar,
     })
 
 def start_game_GERMAN(request):
